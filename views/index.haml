@@ -1,0 +1,17 @@
+!!! 5
+%html(lang="eng")
+  %head
+    %meta(charset="utf-8" http-equiv="Content-Type" content="text/html")
+    :css
+      canvas { display:block; }
+      canvas { background:url(./ios-home.png) }
+  %body
+    %p App Screen
+    %canvas(width="1024" height="768")
+    :javascript
+      var can = document.getElementsByTagName('canvas')[0];
+      var ctx = can.getContext('2d');
+      ctx.strokeStyle = '#f00';
+      ctx.lineWidth = 3;
+      ctx.lineJoin = 'round';
+      ctx.strokeRect(140,60,40,40); 
