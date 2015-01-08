@@ -4,10 +4,3 @@ get '/' do
 
   haml :index
 end
-
-post '/run_script' do
-  # Script.run
-  # Script.get_parsed_data
-
-  redirect '/'
-end

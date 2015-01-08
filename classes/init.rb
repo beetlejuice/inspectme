@@ -1,1 +1,1 @@
-require_relative 'appium_test.rb'
+require_relative 'appium_connector'
