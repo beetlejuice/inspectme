@@ -10,3 +10,4 @@ end
 
 require './models/init'
 require './routes/init'
+require './classes/init'
