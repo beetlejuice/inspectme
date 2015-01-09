@@ -10,14 +10,16 @@ module AppiumConnector
   SERVER_URL = 'http://0.0.0.0:4723/wd/hub/session/'
 
   def update_data screenshot_path
+    load_session_id
     window_source = get_window_source
     window_size = get_window_size
     make_screenshot screenshot_path
+    [window_source, window_size]
   end
 
   private
 
-  attr_writer :session_id
+  attr_accessor :session_id
 
   def get_window_source
     uri = command_uri
@@ -45,29 +47,21 @@ module AppiumConnector
     res_hash = JSON[res]
     size = res_hash['value']
   end
-  
-  def session_id
-    return
-      if !@session_id.nil?
-        @session_id
-      else 
-        load_session_id  
-  end 
 
   def load_session_id
     # TODO: Exception handling
     @session_id = File.open('/tmp/appium_lib_session', 'r').read.strip
-  end
+  end 
 
   def command_uri
-    URI(URI.encode(SERVER_URL + session_id + '/execute'))
+    URI(URI.encode(SERVER_URL + @session_id + '/execute'))
   end
 
   def screenshot_uri
-    URI(URI.encode(SERVER_URL + session_id + '/screenshot'))
+    URI(URI.encode(SERVER_URL + @session_id + '/screenshot'))
   end
 
   def size_uri
-    URI(URI.encode(SERVER_URL + session_id + '/window/current/size'))
+    URI(URI.encode(SERVER_URL + @session_id + '/window/current/size'))
   end
 end

@@ -4,10 +4,10 @@
     %meta(charset="utf-8" http-equiv="Content-Type" content="text/html")
     :css
       canvas { display:block; }
-      canvas { background:url(#{@scr_path}) }
+      canvas { background:url('/screenshot.png') }
   %body
     %p App Screen
-    %canvas(width="1024" height="768")
+    %canvas(width="#{@size['width']}" height="#{@size['height']}")
     :javascript
       var can = document.getElementsByTagName('canvas')[0];
       var ctx = can.getContext('2d');

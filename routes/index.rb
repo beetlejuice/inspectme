@@ -1,5 +1,5 @@
 get '/' do
-  @elements, @scr_path = AppWindowInfo.info
+  @elements, @size = AppWindowInfo.info
 
   haml :index
 end
