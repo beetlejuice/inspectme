@@ -1,1 +1,1 @@
-require_relative 'elements_aggregate'
+require_relative 'app_window_info'

@@ -4,11 +4,9 @@
     %meta(charset="utf-8" http-equiv="Content-Type" content="text/html")
     :css
       canvas { display:block; }
-      -# Need correct image path
-      canvas { background:url(./ios-home.png) }
+      canvas { background:url(#{@scr_path}) }
   %body
     %p App Screen
-    -# Here should be "Run" button
     %canvas(width="1024" height="768")
     :javascript
       var can = document.getElementsByTagName('canvas')[0];

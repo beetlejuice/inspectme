@@ -1,6 +1,5 @@
 get '/' do
-  # Call auto-script method to get updated data
-  # @elements = get_screen_elements
+  @elements, @scr_path = AppWindowInfo.info
 
   haml :index
 end
