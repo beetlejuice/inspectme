@@ -3,17 +3,19 @@ class AppWindowInfo
 
   def self.info
     raw_info = AppiumConnector.update_data SCREENSHOT_PATH
-    elements = self.elements_list raw_info['window_source']
-    info = {'elements': elements, 'size': raw_info['window_size']}
+    elements = self.elements_hash raw_info['window_source']
+    info = {'elements' => elements, 'size' => raw_info['window_size']}
   end
 
   private
 
-  def self.elements_list source
+  def self.elements_hash source
     output = {}
-
-    first_split = source.split(/\}, \{/)
+    # Remove starting and ending '{' '}'
+    clean_source = source.slice(1..-2)
+    first_split = clean_source.split(/\}, \{/)
     second_split = first_split.map { |el| el.split(/\[\{/) }
+    # Remove unneeded deeper array levels produced by split
     flat_list = second_split.flatten
 
     hashes_array = flat_list.map do |str|
@@ -23,7 +25,6 @@ class AppWindowInfo
       eval('{' + str + '}')  
     end
 
-    hash = {}
-    hashes_array.each_with_object(hash).with_index { |(e, h), i| h[i] = e }
+    # hashes_array.each_with_object(output).with_index { |(e, h), i| h[i] = e }
   end
 end

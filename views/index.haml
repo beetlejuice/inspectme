@@ -8,10 +8,11 @@
   %body
     %p App Screen
     %canvas(width="#{@size['width']}" height="#{@size['height']}")
-    :javascript
+    %script
       var can = document.getElementsByTagName('canvas')[0];
       var ctx = can.getContext('2d');
       ctx.strokeStyle = '#f00';
       ctx.lineWidth = 3;
       ctx.lineJoin = 'round';
-      ctx.strokeRect(140,60,40,40); 
+      - @elements.each do |el|
+        ctx.strokeRect(#{el['rect']['origin']['x']},#{el['rect']['origin']['y']},#{el['rect']['size']['width']},#{el['rect']['size']['height']}); 

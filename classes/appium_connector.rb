@@ -14,7 +14,7 @@ module AppiumConnector
     window_source = get_window_source
     window_size = get_window_size
     make_screenshot screenshot_path
-    [window_source, window_size]
+    {'window_source' => window_source, 'window_size' => window_size}
   end
 
   private
@@ -28,7 +28,7 @@ module AppiumConnector
     # req.content_type = 'application/json'
     res = Net::HTTP.start(uri.host, uri.port).request(req)
     res_hash = JSON[res.body]
-    res_hash['value']
+    res_hash['value'].to_s
   end
 
   def make_screenshot path
