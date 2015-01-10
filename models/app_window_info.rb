@@ -16,18 +16,14 @@ class AppWindowInfo
     second_split = first_split.map { |el| el.split(/\[\{/) }
     flat_list = second_split.flatten
 
-    # Preparing a Hash
-    elements = {}
-
-    test.each_with_object(hash).with_index do |(e, h), i|
-      # Divide element info into blocks
-      element_array = e.split(', "')
-      # Clean up double quotes
-      element_array.each { |el| el.gsub!('"', '') }
-      # Preparing arrays for hashing
-      element_array.map! { |el| el.split('=>') }
-      # Hashing element with index in the list as key
-      h[i] = Hash[element_array]
+    hashes_array = flat_list.map do |str|
+      # Remove all 'children' stuff from the end of element description
+      str = str.slice(0..(str.index(', "children"')-1))
+      # Evaluate string as hash
+      eval('{' + str + '}')  
     end
+
+    hash = {}
+    hashes_array.each_with_object(hash).with_index { |(e, h), i| h[i] = e }
   end
 end
