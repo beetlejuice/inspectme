@@ -1,5 +1,5 @@
 class AppWindowInfo
-SCREENSHOT_PATH = './public/screenshot.png'
+  SCREENSHOT_PATH = './public/screenshot.png'
 
   def self.info
     window_source, window_size = AppiumConnector.update_data SCREENSHOT_PATH
