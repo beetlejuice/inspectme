@@ -13,6 +13,7 @@ class AppWindowInfo
     output = {}
     # Remove starting and ending '{' '}'
     clean_source = source.slice(1..-2)
+    # Splitting source into element hashes
     first_split = clean_source.split(/\}, \{/)
     second_split = first_split.map { |el| el.split(/\[\{/) }
     # Remove unneeded deeper array levels produced by split
