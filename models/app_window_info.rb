@@ -14,10 +14,10 @@ class AppWindowInfo
     # Remove starting and ending '{' '}'
     clean_source = source.slice(1..-2)
     # Splitting source into element hashes
+    # First - all along with children items
     first_split = clean_source.split(/\}, \{/)
-    second_split = first_split.map { |el| el.split(/\[\{/) }
-    # Remove unneeded deeper array levels produced by split
-    flat_list = second_split.flatten
+    # Second - divide children into elements
+    second_split = first_split.flat_map { |el| el.split(/\[\{/) }
 
     hashes_array = flat_list.map do |str|
       # Remove all 'children' stuff from the end of element description
